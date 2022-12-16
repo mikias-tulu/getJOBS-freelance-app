@@ -48,4 +48,5 @@ linux/
 web/
 macos/
 windows/
-*.md
+*.metadata
+analysis_options.yaml
