@@ -82,7 +82,7 @@ flutter:
   fonts:
     - family: signatra
       fonts:
-        - asset: fonts/signatra.ttf
+        - asset: assets/fonts/signatra.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
