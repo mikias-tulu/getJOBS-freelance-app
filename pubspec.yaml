@@ -41,16 +41,7 @@ dependencies:
   firebase_core: ^2.4.0
   cloud_firestore: ^4.2.0
   firebase_storage: ^11.0.8
-  #image modification dependencies
-  cached_network_image: ^3.2.3
-  image_picker: ^0.8.6
-  image_cropper: ^3.0.1
   #
-  fluttericon: ^2.0.0
-  url_launcher: ^6.1.7
-  curved_navigation_bar: ^1.0.3
-  uuid: ^3.0.7
-  fluttertoast: ^8.1.2
 
 
 dev_dependencies:
