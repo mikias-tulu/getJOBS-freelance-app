@@ -1,54 +1,35 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:freelance_app/screens/homescreen/home_screen.dart';
+import 'package:freelance_app/screens/introduction_screen.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  runApp(MyApp());
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
-
-  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+  const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: _initialization,
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'getJOBS',
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const MaterialApp(
-              home: Scaffold(
-                body: Center(
-                    child: Text(
-                  'Freelacne app initialized',
-                  style: TextStyle(
-                      fontFamily: 'signatra',
-                      color: Colors.green,
-                      fontSize: 30),
-                )),
-              ),
-            );
-          } else if (snapshot.hasError) {
-            return const MaterialApp(
-              home: Scaffold(
-                body: Center(child: Text('Error has occured')),
-              ),
-            );
+          if (snapshot.hasData) {
+            return const Homescreen();
+          } else {
+            return const OnBoardingPage();
           }
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: "Freelance App",
-            theme: ThemeData(
-                scaffoldBackgroundColor: Colors.black,
-                primarySwatch: Colors.blue),
-            home: const Scaffold(),
-          );
-        });
+        },
+      ),
+    );
   }
 }
