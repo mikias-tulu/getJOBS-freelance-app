@@ -45,6 +45,7 @@ dependencies:
   #homeScreen dependencies
   curved_navigation_bar: ^1.0.3
   searchbar_animation: ^0.0.4
+  popup_card: ^0.1.0
   #profile page
   fluttertoast: ^8.1.2
   file_picker: ^4.1.3
