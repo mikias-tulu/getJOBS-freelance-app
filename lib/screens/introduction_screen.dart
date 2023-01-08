@@ -75,7 +75,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           title: "Fractional shares",
           body:
               "Instead of having to buy an entire share, invest any amount you want.",
-          image: _buildImage('signup.jpg'),
+          image: _buildImage('ic_launcher.png'),
           decoration: pageDecoration,
         ),
         PageViewModel(
@@ -107,7 +107,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         PageViewModel(
           title: "Another title page",
           body: "Another beautiful body text for this example onboarding",
-          image: _buildImage('signup.png'),
+          image: _buildImage('ic_launcher.png'),
           footer: ElevatedButton(
             onPressed: () {
               introKey.currentState?.animateScroll(0);
