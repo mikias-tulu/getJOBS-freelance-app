@@ -3,6 +3,8 @@ import 'package:freelance_app/utils/colors.dart';
 // ignore: depend_on_referenced_packages
 import 'package:searchbar_animation/searchbar_animation.dart';
 
+import '../homescreen/sidebar.dart';
+
 class FieldModel {
   String? job_title;
   String? company_name;
@@ -42,8 +44,20 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        drawer: const SideBar(),
         appBar: AppBar(
-          backgroundColor: yellow,
+          elevation: 0,
+          backgroundColor: white,
+          iconTheme: const IconThemeData(
+            color: Colors.orange,
+          ),
+          title: const Padding(
+            padding: EdgeInsets.only(left: 180),
+            child: Text(
+              "getJOBS",
+              style: TextStyle(color: Colors.orange),
+            ),
+          ),
         ),
         body: Padding(
           padding: const EdgeInsets.all(10),
@@ -73,12 +87,12 @@ class _SearchState extends State<Search> {
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                         borderSide: BorderSide.none),
-                    hintText: "MERN Stack development",
+                    hintText: "Flutter development",
                     prefixIcon: const Icon(Icons.search),
                     prefixIconColor: yellow,
                     suffixIcon: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.yellow,
+                        backgroundColor: Colors.orange,
                         //fixedSize: const Size.fromWidth(100),
                         padding: const EdgeInsets.all(22),
                       ),
