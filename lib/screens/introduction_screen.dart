@@ -19,16 +19,6 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
     );
   }
 
-  Widget _buildFullscreenImage() {
-    return Image.asset(
-      'assets/login.png',
-      fit: BoxFit.cover,
-      height: double.infinity,
-      width: double.infinity,
-      alignment: Alignment.center,
-    );
-  }
-
   Widget _buildImage(String assetName, [double width = 350]) {
     return Image.asset('assets/images/$assetName', width: width);
   }
@@ -38,7 +28,11 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
     const bodyStyle = TextStyle(fontSize: 19.0);
 
     const pageDecoration = PageDecoration(
-      titleTextStyle: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w700),
+      imageFlex: 2,
+      contentMargin: EdgeInsets.only(left: 20, right: 20),
+      bodyAlignment: Alignment.center,
+      imageAlignment: Alignment.bottomCenter,
+      titleTextStyle: TextStyle(fontSize: 25.0, fontWeight: FontWeight.w700),
       bodyTextStyle: bodyStyle,
       bodyPadding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
       pageColor: Colors.white,
@@ -49,13 +43,13 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       key: introKey,
       globalBackgroundColor: Colors.white,
       allowImplicitScrolling: true,
-      autoScrollDuration: 3000,
+      autoScrollDuration: 6000,
       globalHeader: Align(
         alignment: Alignment.topRight,
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.only(top: 16, right: 16),
-            child: _buildImage('logo.png', 100),
+            child: _buildImage('logo.png', 70),
           ),
         ),
       ),
@@ -72,67 +66,34 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       ),
       pages: [
         PageViewModel(
-          title: "Fractional shares",
-          body:
-              "Instead of having to buy an entire share, invest any amount you want.",
-          image: _buildImage('ic_launcher.png'),
+          title: "Welcome to a world of new possibilities!",
+          body: "",
+          image: _buildImage('Dream_jobs.jpg'),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Learn as you go",
-          body:
-              "Download the Stockpile app and master the market with our mini-lesson.",
-          image: _buildImage('login.png'),
-          decoration: pageDecoration,
-        ),
-        PageViewModel(
-          title: "Kids and teens",
-          body:
-              "Kids and teens can track their stocks 24/7 and place trades that you approve.",
-          image: _buildImage('logo.png'),
-          decoration: pageDecoration,
-        ),
-        PageViewModel(
-          title: "Full Screen Page",
-          body:
-              "Pages can be full screen as well.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id euismod lectus, non tempor felis. Nam rutrum rhoncus est ac venenatis.",
-          image: _buildFullscreenImage(),
+          title: "Unlock Endless opportunities",
+          bodyWidget: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              Text("Stay up-to-date with the latest job postings",
+                  style: bodyStyle),
+            ],
+          ),
+          image: _buildImage('search.jpg'),
           decoration: pageDecoration.copyWith(
-            contentMargin: const EdgeInsets.symmetric(horizontal: 16),
-            fullScreen: true,
-            bodyFlex: 2,
-            imageFlex: 3,
-          ),
+              imageFlex: 4,
+              bodyFlex: 2,
+              contentMargin: const EdgeInsets.all(5)),
         ),
         PageViewModel(
-          title: "Another title page",
-          body: "Another beautiful body text for this example onboarding",
-          image: _buildImage('ic_launcher.png'),
-          footer: ElevatedButton(
-            onPressed: () {
-              introKey.currentState?.animateScroll(0);
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.lightBlue,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-            ),
-            child: const Text(
-              'FooButton',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-          decoration: pageDecoration,
-        ),
-        PageViewModel(
-          title: "Title of last page - reversed",
+          title: "getJOBS get the job done!",
           bodyWidget: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
               Text("Click on ", style: bodyStyle),
-              Icon(Icons.edit),
-              Text(" to edit a post", style: bodyStyle),
+              Icon(Icons.post_add_outlined),
+              Text(" to post a job", style: bodyStyle),
             ],
           ),
           decoration: pageDecoration.copyWith(
@@ -141,7 +102,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
             bodyAlignment: Alignment.bottomCenter,
             imageAlignment: Alignment.topCenter,
           ),
-          image: _buildImage('ic_launcher.png'),
+          image: _buildImage('productivity.jpg'),
           reverse: true,
         ),
       ],
