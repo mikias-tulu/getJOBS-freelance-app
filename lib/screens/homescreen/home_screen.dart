@@ -1,7 +1,9 @@
+import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import "package:flutter/material.dart";
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:freelance_app/screens/homescreen/components/categories.dart';
+import 'package:freelance_app/screens/profile/profile.dart';
 import 'package:freelance_app/utils/colors.dart';
 import 'package:freelance_app/screens/homescreen/components/posted_jobs.dart';
 import 'package:freelance_app/screens/homescreen/sidebar.dart';
@@ -21,10 +23,134 @@ class Homescreen extends StatefulWidget {
 class _HomescreenState extends State<Homescreen> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const Homepage(),
-      routes: {Search.routename: (_) => const Search()},
+      home: BottomNavigationPage(
+        title: "getJOBS",
+      ),
+    );
+  }
+}
+
+class BottomNavigationPage extends StatefulWidget {
+  const BottomNavigationPage({Key? key, required this.title}) : super(key: key);
+  final String title;
+
+  @override
+  _BottomNavigationPageState createState() => _BottomNavigationPageState();
+}
+
+class _BottomNavigationPageState extends State<BottomNavigationPage> {
+  late int currentIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    currentIndex = 0;
+  }
+
+  void changePage(int? index) {
+    setState(() {
+      currentIndex = index!;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: <Widget>[
+        const Homepage(),
+        const Search(),
+        Container(),
+        const ProfilePage(),
+      ][currentIndex],
+      floatingActionButton: currentIndex == 0 || currentIndex == 1
+          ? FloatingActionButton(
+              backgroundColor: const Color.fromARGB(255, 245, 171, 59),
+              onPressed: () {},
+              child: const Icon(
+                Icons.add_rounded,
+                //size: 40,
+                color: Colors.white,
+              ),
+            )
+          : null,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      bottomNavigationBar: BubbleBottomBar(
+        backgroundColor: Colors.white,
+        hasNotch: false,
+        //fabLocation: BubbleBottomBarFabLocation.end,
+        opacity: 0.5,
+        currentIndex: currentIndex,
+        onTap: changePage,
+        borderRadius: const BorderRadius.vertical(
+          top: Radius.circular(0),
+        ), //border radius doesn't work when the notch is enabled.
+        //elevation: 10,
+        tilesPadding: const EdgeInsets.symmetric(
+          vertical: 8.0,
+        ),
+
+        items: const <BubbleBottomBarItem>[
+          BubbleBottomBarItem(
+            backgroundColor: Colors.blueGrey,
+            icon: Icon(
+              Icons.dashboard,
+              color: Colors.black,
+            ),
+            activeIcon: Icon(
+              Icons.dashboard,
+              color: Colors.white,
+            ),
+            title: Text(
+              "Home",
+              style: TextStyle(color: Color(0xFFFFFFFF)),
+            ),
+          ),
+          BubbleBottomBarItem(
+              backgroundColor: Colors.blueGrey,
+              icon: Icon(
+                Icons.search,
+                color: Colors.black,
+              ),
+              activeIcon: Icon(
+                Icons.search,
+                color: Colors.white,
+              ),
+              title: Text(
+                "Search",
+                style: TextStyle(color: Color(0xFFFFFFFF)),
+              )),
+          BubbleBottomBarItem(
+              backgroundColor: Colors.blueGrey,
+              icon: Icon(
+                Icons.library_books,
+                color: Colors.black,
+              ),
+              activeIcon: Icon(
+                Icons.library_books,
+                color: Colors.white,
+              ),
+              title: Text(
+                "Activity",
+                style: TextStyle(color: Color(0xFFFFFFFF)),
+              )),
+          BubbleBottomBarItem(
+              backgroundColor: Colors.blueGrey,
+              icon: Icon(
+                Icons.person_outline,
+                color: Colors.black,
+              ),
+              activeIcon: Icon(
+                Icons.person_outline_rounded,
+                color: Colors.white,
+              ),
+              title: Text(
+                "Profile",
+                style: TextStyle(color: Color(0xFFFFFFFF)),
+              )),
+        ],
+      ),
     );
   }
 }
@@ -42,10 +168,17 @@ class _HomepageState extends State<Homepage> {
     return Scaffold(
       drawer: const SideBar(),
       appBar: AppBar(
-        backgroundColor: yellow,
+        elevation: 0,
+        backgroundColor: white,
+        iconTheme: const IconThemeData(
+          color: Colors.orange,
+        ),
         title: const Padding(
           padding: EdgeInsets.only(left: 180),
-          child: Text("getJOBS"),
+          child: Text(
+            "getJOBS",
+            style: TextStyle(color: Colors.orange),
+          ),
         ),
       ),
       body: SafeArea(
@@ -54,14 +187,14 @@ class _HomepageState extends State<Homepage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
             Padding(
-              padding: EdgeInsets.only(left: 5, top: 20),
+              padding: EdgeInsets.only(left: 15, top: 20),
               child: Text(
                 "Find Your Perfect ",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 15, bottom: 30),
+              padding: EdgeInsets.only(left: 15, bottom: 15),
               child: Text(
                 "Job",
                 style: TextStyle(
@@ -73,62 +206,13 @@ class _HomepageState extends State<Homepage> {
             ),
             Category(),
             SizedBox(
-              height: 25,
+              height: 10,
             ),
             Postedjob(),
             //Bottomnavbar(),
           ],
         ),
       ),
-
-      //job post floating action button
-      floatingActionButton: PopupItemLauncher(
-        tag: 'test',
-        popUp: PopUpItem(
-          padding: const EdgeInsets.all(8),
-          color: Colors.white,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-          elevation: 2,
-          tag: 'test',
-          child: const JobPosts(),
-        ),
-        child: Material(
-          color: Colors.white,
-          elevation: 2,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-          child: const Icon(FontAwesomeIcons.filePen),
-          /* const Icon(
-            Icons.,
-            size: 56,
-          ), */
-        ),
-      ),
-
-      /*
-      bottomNavigationBar: Container(
-        margin: EdgeInsets.only(left: 8, right: 8, bottom: 15),
-        color: white,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Icon(Icons.home, size: 35),
-            /* GestureDetector(
-              onTap: () => Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => Second())),
-              child: IconButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed(Second.routename);
-                  },
-                  icon: Icon(Icons.shopping_bag_outlined, size: 35)),
-            ),*/
-            Icon(Icons.search, size: 35),
-            Icon(Icons.post_add_rounded, size: 35),
-            Icon(Icons.person, size: 35),
-          ],
-        ),
-      ),*/
     );
   }
 }
