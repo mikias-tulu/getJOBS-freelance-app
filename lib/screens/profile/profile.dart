@@ -8,6 +8,9 @@ import 'dart:async';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:dio/dio.dart';
 
+import '../../utils/colors.dart';
+import '../homescreen/sidebar.dart';
+
 TextEditingController fullName = TextEditingController();
 TextEditingController email = TextEditingController();
 TextEditingController phoneNum = TextEditingController();
@@ -34,8 +37,23 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Profile(),
+    return Scaffold(
+      drawer: const SideBar(),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: white,
+        iconTheme: const IconThemeData(
+          color: Colors.orange,
+        ),
+        title: const Padding(
+          padding: EdgeInsets.only(left: 180),
+          child: Text(
+            "getJOBS",
+            style: TextStyle(color: Colors.orange),
+          ),
+        ),
+      ),
+      body: const Profile(),
     );
   }
 }
@@ -138,9 +156,6 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
-      ),
       body: Stepper(
         type: StepperType.horizontal,
         steps: stepList(),
