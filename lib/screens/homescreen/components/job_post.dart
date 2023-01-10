@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:freelance_app/widgets/custom_textfield.dart';
 
 class JobPosts extends StatelessWidget {
-  const JobPosts({
+  TextEditingController fullName = TextEditingController();
+  JobPosts({
     Key? key,
   }) : super(key: key);
 
@@ -11,28 +13,35 @@ class JobPosts extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const TextField(
-            decoration: InputDecoration(
-              hintText: 'New todo',
-              border: InputBorder.none,
-            ),
-            cursorColor: Colors.white,
+          const Text(
+            "Post Job",
+            style: TextStyle(fontSize: 20, color: Colors.blueGrey),
           ),
           const Divider(
-            color: Colors.white,
+            color: Colors.grey,
             thickness: 0.2,
+            indent: 35,
+            endIndent: 35,
           ),
-          const TextField(
-            decoration: InputDecoration(
-              hintText: 'Write a note',
-              border: InputBorder.none,
-            ),
-            cursorColor: Colors.white,
-            maxLines: 6,
+          CustomTextfield(
+            myController: fullName,
+            hintText: "hint",
+            isPassword: false,
           ),
-          const Divider(
-            color: Colors.white,
-            thickness: 0.2,
+          CustomTextfield(
+            myController: fullName,
+            hintText: "hint",
+            isPassword: false,
+          ),
+          CustomTextfield(
+            myController: fullName,
+            hintText: "hint",
+            isPassword: false,
+          ),
+          CustomTextfield(
+            myController: fullName,
+            hintText: "hint",
+            isPassword: false,
           ),
           TextButton(
             onPressed: () {},
