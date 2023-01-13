@@ -67,7 +67,14 @@ class _BottomNavigationPageState extends State<BottomNavigationPage> {
       floatingActionButton: currentIndex == 0 || currentIndex == 1
           ? FloatingActionButton(
               backgroundColor: const Color.fromARGB(255, 245, 171, 59),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) => JobPosts() //const LoginScreen(),
+                      ),
+                );
+              },
               child: const Icon(
                 Icons.add_rounded,
                 //size: 40,
