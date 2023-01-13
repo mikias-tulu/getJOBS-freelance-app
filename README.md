@@ -1,10 +1,10 @@
 <br/>
 <p align="center">
   <a href="https://github.com/mikias-tulu/freelance_app">
-    <img src="assets/images/logo.png" alt="Logo" width="80" height="80">
+    <img src="assets/images/logo.png" alt="Logo" width="120" height="120">
   </a>
 
-  <h3 align="center">getJOBS </h3>
+  <h1 align="center">getJOBS </h1>
 
   <p align="center">
     getJOBS get the job done!
