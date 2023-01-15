@@ -1,35 +1,69 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:freelance_app/screens/homescreen/home_screen.dart';
-import 'package:freelance_app/screens/introduction_screen.dart';
+import 'config/themes/user_state.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'getJOBS',
-      home: StreamBuilder(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return const Homescreen();
-          } else {
-            return const OnBoardingPage();
-          }
-        },
-      ),
+    return FutureBuilder(
+      future: _initialization,
+      builder: ((context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              scaffoldBackgroundColor: Colors.black,
+              primarySwatch: Colors.blue,
+            ),
+            home: const Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(color: Colors.blue),
+              ),
+            ),
+          );
+        } else if (snapshot.hasError) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              scaffoldBackgroundColor: Colors.black,
+              primarySwatch: Colors.blue,
+            ),
+            home: const Scaffold(
+              body: Center(
+                child: Text(
+                  'An error has occurred',
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          );
+        } else {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'getJOBS',
+            theme: ThemeData(
+              scaffoldBackgroundColor: Colors.white,
+              primarySwatch: Colors.blue,
+            ),
+            home: const UserState(),
+          );
+        }
+      }),
     );
   }
 }
