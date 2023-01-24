@@ -1,6 +1,6 @@
+import 'package:freelance_app/screens/welcome_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:freelance_app/screens/welcome_screen.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
 class OnBoardingPage extends StatefulWidget {
@@ -19,7 +19,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
     );
   }
 
-  Widget _buildImage(String assetName, [double width = 350]) {
+  Widget _buildImage(String assetName, [double width = 400]) {
     return Image.asset('assets/images/$assetName', width: width);
   }
 
@@ -28,28 +28,23 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
     const bodyStyle = TextStyle(fontSize: 19.0);
 
     const pageDecoration = PageDecoration(
-      imageFlex: 2,
-      contentMargin: EdgeInsets.only(left: 20, right: 20),
-      bodyAlignment: Alignment.center,
-      imageAlignment: Alignment.bottomCenter,
-      titleTextStyle: TextStyle(fontSize: 25.0, fontWeight: FontWeight.w700),
-      bodyTextStyle: bodyStyle,
-      bodyPadding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
-      pageColor: Colors.white,
-      imagePadding: EdgeInsets.zero,
-    );
+        titleTextStyle: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w700),
+        bodyTextStyle: bodyStyle,
+        bodyPadding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
+        pageColor: Colors.white,
+        imageFlex: 2,
+        imagePadding: EdgeInsets.zero //(top: 100),
+        );
 
     return IntroductionScreen(
       key: introKey,
       globalBackgroundColor: Colors.white,
-      allowImplicitScrolling: true,
-      autoScrollDuration: 6000,
       globalHeader: Align(
         alignment: Alignment.topRight,
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.only(top: 16, right: 16),
-            child: _buildImage('logo.png', 70),
+            child: _buildImage('logo.png', 60),
           ),
         ),
       ),
@@ -57,6 +52,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         width: double.infinity,
         height: 60,
         child: ElevatedButton(
+          style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.orange)),
           child: const Text(
             'Let\'s go right away!',
             style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
@@ -73,18 +70,9 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         ),
         PageViewModel(
           title: "Unlock Endless opportunities",
-          bodyWidget: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Text("Stay up-to-date with the latest job postings",
-                  style: bodyStyle),
-            ],
-          ),
-          image: _buildImage('search.jpg'),
-          decoration: pageDecoration.copyWith(
-              imageFlex: 4,
-              bodyFlex: 2,
-              contentMargin: const EdgeInsets.all(5)),
+          body: "Stay up-to-date with the latest job postings",
+          image: _buildImage('opportunities.jpg'),
+          decoration: pageDecoration,
         ),
         PageViewModel(
           title: "getJOBS get the job done!",
@@ -98,7 +86,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           ),
           decoration: pageDecoration.copyWith(
             bodyFlex: 2,
-            imageFlex: 4,
+            imageFlex: 3,
             bodyAlignment: Alignment.bottomCenter,
             imageAlignment: Alignment.topCenter,
           ),
@@ -108,16 +96,21 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       ],
       onDone: () => _onIntroEnd(context),
       //onSkip: () => _onIntroEnd(context), // You can override onSkip callback
-      showSkipButton: false,
+      showSkipButton: true,
       skipOrBackFlex: 0,
       nextFlex: 0,
-      showBackButton: true,
+      showBackButton: false,
       //rtl: true, // Display as right-to-left
-      back: const Icon(Icons.arrow_back),
-      skip: const Text('Skip', style: TextStyle(fontWeight: FontWeight.w600)),
-      next: const Icon(Icons.arrow_forward),
-      done: const Text('Done', style: TextStyle(fontWeight: FontWeight.w600)),
-      curve: Curves.fastLinearToSlowEaseIn,
+      back: const Icon(
+        Icons.arrow_back,
+        color: Colors.orange,
+      ),
+      skip: const Text('Skip',
+          style: TextStyle(fontWeight: FontWeight.w600, color: Colors.orange)),
+      next: const Icon(Icons.arrow_forward, color: Colors.orange),
+      done: const Text('Done',
+          style: TextStyle(fontWeight: FontWeight.w600, color: Colors.orange)),
+      curve: Curves.bounceIn, //Curves.fastLinearToSlowEaseIn,
       controlsMargin: const EdgeInsets.all(16),
       controlsPadding: kIsWeb
           ? const EdgeInsets.all(12.0)
@@ -129,11 +122,12 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         activeShape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(25.0)),
         ),
+        activeColor: Colors.orange,
       ),
       dotsContainerDecorator: const ShapeDecoration(
-        color: Colors.black87,
+        color: Color.fromARGB(221, 58, 56, 56),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),
         ),
       ),
     );
