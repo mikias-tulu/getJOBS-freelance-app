@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:freelance_app/screens/homescreen/bottom_navbar.dart';
+import 'package:freelance_app/screens/homescreen/home_screen.dart';
 import 'package:freelance_app/screens/introduction_screen.dart';
 
 class UserState extends StatelessWidget {
