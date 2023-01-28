@@ -1,5 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'config/themes/user_state.dart';
+import 'config/user_state.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 
