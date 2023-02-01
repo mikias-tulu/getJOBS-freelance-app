@@ -1,4 +1,5 @@
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -7,9 +8,8 @@ import 'package:freelance_app/screens/profile/profile.dart';
 import 'package:freelance_app/utils/colors.dart';
 import 'package:freelance_app/screens/homescreen/components/posted_jobs.dart';
 import 'package:freelance_app/screens/homescreen/sidebar.dart';
-import 'package:freelance_app/screens/homescreen/bottom_navbar.dart';
 import 'package:freelance_app/screens/search/search_screen.dart';
-import 'package:popup_card/popup_card.dart';
+import 'package:uuid/uuid.dart';
 
 import 'components/job_post.dart';
 
@@ -42,6 +42,7 @@ class BottomNavigationPage extends StatefulWidget {
 
 class _BottomNavigationPageState extends State<BottomNavigationPage> {
   late int currentIndex;
+  User? user = FirebaseAuth.instance.currentUser;
 
   @override
   void initState() {
@@ -57,6 +58,8 @@ class _BottomNavigationPageState extends State<BottomNavigationPage> {
 
   @override
   Widget build(BuildContext context) {
+    final _uid = user!.uid;
+    print(_uid);
     return Scaffold(
       body: <Widget>[
         const Homepage(),
@@ -71,7 +74,9 @@ class _BottomNavigationPageState extends State<BottomNavigationPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (_) => JobPosts() //const LoginScreen(),
+                      builder: (_) => Upload(
+                            userID: _uid,
+                          ) //const LoginScreen(),
                       ),
                 );
               },
@@ -173,7 +178,7 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const SideBar(),
+      drawer: SideBar(),
       appBar: AppBar(
         elevation: 0,
         backgroundColor: white,
