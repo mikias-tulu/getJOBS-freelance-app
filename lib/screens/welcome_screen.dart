@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:freelance_app/screens/homescreen/home_screen.dart';
+import 'package:freelance_app/screens/user/login_screen.dart';
+import 'package:freelance_app/screens/user/signup_screen.dart';
 
 import '../widgets/custom_button.dart';
 
@@ -39,8 +40,8 @@ class WelcomeScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (_) => const Homescreen() //const LoginScreen(),
-                      ),
+                    builder: (_) => const LoginScreen(),
+                  ),
                 );
               },
             ),
@@ -52,8 +53,8 @@ class WelcomeScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (_) => const Homescreen() //SignUpScreen(),
-                      ),
+                    builder: (_) => const SignUpScreen(),
+                  ),
                 );
               },
             ),
