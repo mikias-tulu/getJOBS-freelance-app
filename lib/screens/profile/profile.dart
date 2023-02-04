@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
@@ -6,10 +8,11 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'dart:async';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:dio/dio.dart';
+//import 'package:dio/dio.dart';
 
 import '../../utils/colors.dart';
 import '../homescreen/sidebar.dart';
+import 'package:freelance_app/utils/global_variables.dart';
 
 TextEditingController fullName = TextEditingController();
 TextEditingController email = TextEditingController();
@@ -38,7 +41,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const SideBar(),
+      drawer: SideBar(),
       appBar: AppBar(
         elevation: 0,
         backgroundColor: white,
@@ -210,6 +213,7 @@ class _InfoFormState extends State<InfoForm> {
 
   @override
   Widget build(BuildContext context) {
+    getAvatar();
     return Column(
       children: [
         InkWell(
@@ -224,9 +228,12 @@ class _InfoFormState extends State<InfoForm> {
                       fit: BoxFit.cover,
                     ),
                   )
-                : const CircleAvatar(
-                    backgroundImage: NetworkImage(
+                : CircleAvatar(
+                    backgroundImage: avatarImage,
+                    /*
+                    NetworkImage(
                         'https://st4.depositphotos.com/4329009/19956/v/600/depositphotos_199564354-stock-illustration-creative-vector-illustration-default-avatar.jpg'),
+                    */
                     backgroundColor: Colors.lightGreen,
                     radius: 100,
                   ),
@@ -447,6 +454,16 @@ class _InfoFormState extends State<InfoForm> {
             child: const Text('click'))
       ],
     );
+  }
+
+  //temporary profile controller from firestore
+  getAvatar() async {
+    final DocumentSnapshot userDoc = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+    avatarURL = userDoc.get('user_image');
+    avatarImage = NetworkImage(avatarURL.toString());
   }
 }
 
