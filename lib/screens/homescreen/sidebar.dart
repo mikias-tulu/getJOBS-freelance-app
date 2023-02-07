@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:freelance_app/utils/colors.dart';
 
-import '../../config/themes/user_state.dart';
+import '../../config/user_state.dart';
 
 class SideBar extends StatelessWidget {
   final FirebaseAuth _auth = FirebaseAuth.instance;
