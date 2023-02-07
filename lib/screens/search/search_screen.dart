@@ -44,7 +44,7 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: const SideBar(),
+        drawer: SideBar(),
         appBar: AppBar(
           elevation: 0,
           backgroundColor: white,
