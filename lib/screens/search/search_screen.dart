@@ -1,7 +1,5 @@
 import "package:flutter/material.dart";
 import 'package:freelance_app/utils/colors.dart';
-// ignore: depend_on_referenced_packages
-import 'package:searchbar_animation/searchbar_animation.dart';
 
 import '../homescreen/sidebar.dart';
 
