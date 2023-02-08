@@ -8,7 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 class ProfileScreen extends StatefulWidget {
   final String userID;
 
-  const ProfileScreen({required this.userID});
+  const ProfileScreen({super.key, required this.userID});
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
@@ -98,14 +98,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               const SizedBox(
                                 height: 15,
                               ),
-                              Divider(
+                              const Divider(
                                 thickness: 1,
                                 color: Colors.white,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 30,
                               ),
-                              Padding(
+                              const Padding(
                                 padding: const EdgeInsets.all(10.0),
                                 child: Text(
                                   'Account Information :',
@@ -113,7 +113,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       color: Color(0xff044404), fontSize: 22.0),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 15,
                               ),
                               Padding(
@@ -127,10 +127,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     icon: Icons.phone_android,
                                     content: phoneNumber),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 35,
                               ),
-                              Divider(
+                              const Divider(
                                 thickness: 1,
                                 color: Colors.white,
                               ),
@@ -161,14 +161,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             icon: Icons.call_outlined),
                                       ],
                                     ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 25,
                               ),
-                              Divider(
+                              const Divider(
                                 thickness: 1,
                                 color: Colors.white,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 25,
                               ),
                               !_isSameUser
@@ -188,7 +188,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               ),
                                             );
                                           },
-                                          color: Color(0xff044404),
+                                          color: const Color(0xff044404),
                                           elevation: 8,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
@@ -200,7 +200,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               mainAxisSize: MainAxisSize.min,
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
-                                              children: [
+                                              children: const [
                                                 Text(
                                                   'Logout',
                                                   style: TextStyle(
@@ -274,9 +274,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   void _callPhoneNumber() async {
-    var url = 'tel://$phoneNumber';
-    if (await canLaunch(url)) {
-      await launch(url);
+    var url = Uri.parse('tel://$phoneNumber');
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
     } else {
       throw 'Error occurred';
     }
