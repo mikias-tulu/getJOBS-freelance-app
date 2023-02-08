@@ -49,8 +49,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             ),
             const Padding(
               padding: EdgeInsets.all(8.0),
-              child: Text(
-                  "Dont worry it occurs to us all. We will send you a link to reset your password.",
+              child: Text("We will send you a link to reset your password.",
                   style: TextStyle(
                     color: Color(0xff8391A1),
                     fontSize: 20,
