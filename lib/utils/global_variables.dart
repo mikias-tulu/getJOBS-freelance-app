@@ -9,6 +9,9 @@ String signUpUrlImage =
 String forgetPasswordUrlImage =
     'https://miro.medium.com/max/720/1*LerIi8K3mAj3ZdnCjad61Q.jpeg';
 
+String imageprofile =
+    'https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png';
+
 List<String> jobCategories = [
   'Architecture and Construction',
   'Education and Training',
