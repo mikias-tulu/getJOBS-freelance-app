@@ -87,7 +87,7 @@ class _SearchState extends State<Search> {
                         borderSide: BorderSide.none),
                     hintText: "Flutter development",
                     prefixIcon: const Icon(Icons.search),
-                    prefixIconColor: yellow,
+                    prefixIconColor: Color.fromRGBO(245, 186, 65, 1),
                     suffixIcon: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.orange,
@@ -102,10 +102,10 @@ class _SearchState extends State<Search> {
                 ),
               ),
               const SizedBox(
-                height: 20.0,
+                height: 10.0,
               ),
               SizedBox(
-                height: 300,
+                height: 200,
                 child: display_list.isEmpty
                     ? const Center(
                         child: Text("No result found",
