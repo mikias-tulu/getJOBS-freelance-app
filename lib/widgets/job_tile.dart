@@ -149,7 +149,7 @@ class _JobTileState extends State<JobTile> {
           if (widget.uploadedBy == uid) {
             await FirebaseFirestore.instance
                 .collection('jobPosted')
-                .doc("job_id")
+                .doc(widget.jobID)
                 .delete();
             Navigator.canPop(context) ? Navigator.pop(context) : null;
             Navigator.canPop(context) ? Navigator.pop(context) : null;
