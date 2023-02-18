@@ -62,8 +62,21 @@ class _UploadState extends State<Upload> {
       child: Container(
         decoration: boxDecorationGradient(),
         child: Scaffold(
-          backgroundColor: Colors.transparent,
-          //bottomNavigationBar: BottomNavBar(navIndex: 2),
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: Colors.white,
+            iconTheme: const IconThemeData(
+              color: Colors.orange,
+            ),
+            title: const Padding(
+              padding: EdgeInsets.only(left: 180),
+              child: Text(
+                "getJOBS",
+                style: TextStyle(color: Colors.orange),
+              ),
+            ),
+          ),
+          backgroundColor: Colors.white,
           body: Padding(
             padding: const EdgeInsets.only(
               top: layout.padding * 3,
@@ -509,6 +522,7 @@ class _UploadState extends State<Upload> {
         'recruiting': true,
         'applicants': 0,
         'comments': [],
+        'applicantsList': [],
       });
       await Fluttertoast.showToast(
         msg: 'The job has been successfully uploaded.',
