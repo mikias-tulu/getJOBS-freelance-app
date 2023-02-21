@@ -1,7 +1,7 @@
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:freelance_app/screens/activity/activity.dart';
 
 import 'package:freelance_app/screens/homescreen/components/categories.dart';
 import 'package:freelance_app/screens/profile/profile.dart';
@@ -64,8 +64,10 @@ class _BottomNavigationPageState extends State<BottomNavigationPage> {
       body: <Widget>[
         const Homepage(),
         const Search(),
-        Container(),
-        const ProfilePage(),
+        const JobsActivity(),
+        ProfilePage(
+          userID: _uid,
+        ),
       ][currentIndex],
       floatingActionButton: currentIndex == 0 || currentIndex == 1
           ? FloatingActionButton(
@@ -216,7 +218,7 @@ class _HomepageState extends State<Homepage> {
                 ),
               ),
             ),
-            Category(),
+            // Category(),
             SizedBox(
               height: 10,
             ),
