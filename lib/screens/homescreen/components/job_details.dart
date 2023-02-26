@@ -45,7 +45,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
     getJobData();
   }
 
-  applyForJob() {
+  applyForJob() async {
     final Uri params = Uri(
       scheme: 'mailto',
       path: emailCompany,
@@ -58,6 +58,22 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
   }
 
   void addNewApplicant() async {
+    final _generatedId = const Uuid().v4();
+    await FirebaseFirestore.instance
+        .collection('jobPosted')
+        .doc(widget.job_id)
+        .update({
+      'applicantsList': FieldValue.arrayUnion([
+        {
+          'id': FirebaseAuth.instance.currentUser!.uid,
+          'applicantsId': widget.job_id,
+          'name': authorName,
+          'user_image': user_image,
+          //'commentBody': _commentController.text,
+          'timeapplied': Timestamp.now(),
+        }
+      ]),
+    });
     var docRef =
         FirebaseFirestore.instance.collection('jobPosted').doc(widget.job_id);
 
@@ -112,13 +128,22 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         leading: IconButton(
-            icon: const Icon(Icons.close, size: 40, color: Colors.grey),
+            icon: const Icon(Icons.close_sharp, size: 30, color: Colors.black),
             onPressed: () {
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (context) => const Homescreen()));
             }),
+        title: const Text(
+          "Job Details",
+          style: TextStyle(
+            fontSize: 20,
+            color: Colors.grey,
+          ),
+        ),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -127,7 +152,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
             Padding(
               padding: const EdgeInsets.all(4.0),
               child: Card(
-                color: const Color(0xff044404),
+                color: Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
@@ -139,7 +164,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                           jobTitle == null ? '' : jobTitle!,
                           maxLines: 3,
                           style: const TextStyle(
-                              color: Colors.white,
+                              color: Colors.black,
                               fontWeight: FontWeight.bold,
                               fontSize: 30),
                         ),
@@ -178,15 +203,15 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                                   style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
-                                      color: Colors.white),
+                                      color: Colors.black),
                                 ),
                                 const SizedBox(
                                   height: 5,
                                 ),
-                                Text(
-                                  locationCompany,
-                                  style: TextStyle(color: Colors.grey),
-                                ),
+                                Text(locationCompany,
+                                    style: const TextStyle(
+                                      color: Colors.grey,
+                                    )),
                               ],
                             ),
                           ),
@@ -199,7 +224,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                           Text(
                             applicants.toString(),
                             style: const TextStyle(
-                                color: Colors.white,
+                                color: Colors.black,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18),
                           ),
@@ -209,7 +234,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                           const Text(
                             'Applicants',
                             style: TextStyle(
-                              color: Colors.grey,
+                              color: Colors.black,
                             ),
                           ),
                           const SizedBox(
@@ -231,7 +256,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                                   'Recruitment:',
                                   style: TextStyle(
                                       fontSize: 18,
-                                      color: Colors.white,
+                                      color: Colors.black,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 const SizedBox(
@@ -332,7 +357,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                         'Job Description:',
                         style: TextStyle(
                             fontSize: 18,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(
@@ -355,7 +380,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
             Padding(
               padding: const EdgeInsets.all(4.0),
               child: Card(
-                color: const Color(0xff044404),
+                color: Colors.orange[200],
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
@@ -392,7 +417,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                           child: const Padding(
                             padding: EdgeInsets.symmetric(vertical: 14),
                             child: Text(
-                              'Easy Apply Now',
+                              'Apply Now',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -407,12 +432,12 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                         children: [
                           const Text(
                             'Uploaded on:',
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: Colors.black),
                           ),
                           Text(
                             postedDate == null ? '' : postedDate!,
                             style: const TextStyle(
-                                color: Colors.grey,
+                                color: Colors.black,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 15),
                           )
@@ -426,12 +451,12 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                         children: [
                           const Text(
                             'Deadline date:',
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: Colors.black),
                           ),
                           Text(
                             deadlineDate == null ? '' : deadlineDate!,
                             style: const TextStyle(
-                                color: Colors.grey,
+                                color: Colors.black,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 15),
                           )
@@ -446,7 +471,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
             Padding(
               padding: const EdgeInsets.all(4.0),
               child: Card(
-                color: const Color(0xff044404),
+                color: Colors.orange[200],
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
