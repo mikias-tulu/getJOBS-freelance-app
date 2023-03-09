@@ -39,7 +39,7 @@
 
 ## About The Project
 
-![Screen Shot](https://raw.githubusercontent.com/mikias-tulu/freelance_app/main/Screenshots/mainPreview.jpg)
+![Screen Shot](https://raw.githubusercontent.com/mikias-tulu/freelance_app/main/Screenshots/mainPreview.png)
 
 getJOBS is a mobile application designed to make the job posting and job application process as easy as possible for freelancers. With getJOBS, job seekers can quickly search for job opportunities based on their skills and location, while job posters can create job postings with all the relevant job details, including budget and required skills.
 
@@ -128,5 +128,4 @@ Distributed under the MIT License. See [LICENSE](https://github.com/mikias-tulu/
 ## Authors
 
 * **Mikias Tulu** - *Comp Sci Student* - [Mikias Tulu](https://github.com/mikias-tulu) - *Built the project*
-
 
